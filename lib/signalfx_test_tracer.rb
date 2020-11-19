@@ -3,11 +3,11 @@
 require 'opentracing'
 require 'logger'
 
-require_relative 'opentracing_test_tracer/span'
-require_relative 'opentracing_test_tracer/span_context'
-require_relative 'opentracing_test_tracer/trace_id'
-require_relative 'opentracing_test_tracer/scope_manager'
-require_relative 'opentracing_test_tracer/scope'
+require_relative 'signalfx_test_tracer/span'
+require_relative 'signalfx_test_tracer/span_context'
+require_relative 'signalfx_test_tracer/trace_id'
+require_relative 'signalfx_test_tracer/scope_manager'
+require_relative 'signalfx_test_tracer/scope'
 
 class OpenTracingTestTracer
   def self.build(logger: Logger.new(STDOUT))

@@ -7,13 +7,13 @@ OpenTracing compatible in-memory Tracer implementation. It exposes information a
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'opentracing_test_tracer'
+gem 'signalfx_test_tracer'
 ```
 
 ## Usage
 
 ```ruby
-require 'opentracing_test_tracer'
+require 'signalfx_test_tracer'
 OpenTracing.global_tracer = OpenTracingTestTracer.build
 
 OpenTracing.start_active_span('span name') do
@@ -61,6 +61,6 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/salemo
 
 This gem is heavily inspired by @iaintshine [test-tracer](https://github.com/iaintshine/ruby-test-tracer).
 
-**opentracing_test_tracer** is maintained and funded by [SaleMove, Inc].
+**signalfx_test_tracer** is maintained and funded by [SaleMove, Inc].
 
 [SaleMove, Inc]: http://salemove.com/ "SaleMove Website"
