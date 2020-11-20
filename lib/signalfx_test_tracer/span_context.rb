@@ -16,11 +16,12 @@ class OpenTracingTestTracer
       )
     end
 
-    attr_reader :span_id, :parent_id, :trace_id, :baggage
+    attr_reader :span_id, :parent_id, :parent_span_id, :trace_id, :baggage
 
     def initialize(span_id:, parent_id: nil, trace_id:, baggage: {})
       @span_id = span_id
       @parent_id = parent_id
+      @parent_span_id = parent_id
       @trace_id = trace_id
       @baggage = baggage
     end

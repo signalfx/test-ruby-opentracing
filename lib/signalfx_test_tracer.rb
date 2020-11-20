@@ -73,7 +73,8 @@ class OpenTracingTestTracer
       operation_name: operation_name,
       start_time: start_time,
       references: references,
-      tags: tags
+      tags: tags,
+      tracer: self,
     )
     @spans << span
     span
@@ -119,7 +120,7 @@ class OpenTracingTestTracer
       references: references,
       start_time: start_time,
       tags: tags,
-      ignore_active_scope: ignore_active_scope
+      ignore_active_scope: ignore_active_scope,
     )
     scope = @scope_manager.activate(span, finish_on_close: finish_on_close)
 
@@ -220,5 +221,10 @@ class OpenTracingTestTracer
 
     active_scope = @scope_manager.active
     active_scope&.span&.context
+  end
+
+  def record_exception(exception, record_error=true)
+    span = @scope_manager.active
+    span.record_exception(exception, record_error) if span 
   end
 end

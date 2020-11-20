@@ -12,7 +12,8 @@ class OpenTracingTestTracer
       operation_name:,
       start_time: Time.now,
       tags: {},
-      references: nil
+      references: nil,
+      tracer: nil
     )
       @context = context
       @operation_name = operation_name
@@ -20,6 +21,11 @@ class OpenTracingTestTracer
       @tags = tags
       @logs = []
       @references = references
+      @tracer = tracer
+    end
+
+    def tracer
+      @tracer
     end
 
     # Set a tag value on this span
@@ -64,6 +70,16 @@ class OpenTracingTestTracer
     def log_kv(timestamp: Time.now, **fields)
       @logs << fields.merge(timestamp: timestamp)
       nil
+    end
+
+    # Record an exception on this span
+    def record_exception(exception, record_error=true)
+      set_tag(:error, true) if record_error
+      set_tag(:'sfx.error.kind', exception.class.to_s) 
+      set_tag(:'sfx.error.message', exception.message)
+      if not exception.backtrace.nil?
+        set_tag(:'sfx.error.stack', exception.backtrace.join('\n'))
+      end
     end
 
     # Finish the {Span}
